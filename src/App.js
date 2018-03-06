@@ -1,59 +1,31 @@
-import React, { Component } from 'react';
-import './App.css';
-import { productService } from './services/product.services'
-import { FormText } from './components/forms/FormText'
+import React, { Component } from 'react'
+import { Router, Route, Switch } from 'react-router-dom'
+import createBrowserHistory from 'history/createBrowserHistory'
+import { ProductDetail } from './pages/ProductDetail'
+import { ProductList } from './pages/ProductList'
 import { Header } from './containers/Header'
-import { LoadingSpinner } from './components/LoadingSpinner';
-import { ProductItem } from './components/ProductItem';
+export const history = createBrowserHistory()
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      productList: ''
-    }
-  }
-
-  async componentDidMount() {
-    // Api Test
-    const res = await productService.getProduct()
-    console.log(res.data)
-    if (res.data.status === 'success') {
-      this.setState({
-        productList: res.data.data_list
-      })
-    }
+class app extends Component {
+  constructor(props){
+    super(props)
   }
 
   render() {
     return (
-      <div className="App">
+      <div>
         <Header></Header>
-        {/* Slicing router here later */}
         <div className="store_container scroll_wrapper">
-          <h2 className="title is-3">Cari Produk</h2>
-          <div className="search_bar">
-            <FormText></FormText>
-          </div>
-          <hr/>
-          <div className="columns">
-            {
-              this.state.productList ? this.state.productList.map((data, index) =>
-                <ProductItem 
-                  key={index} 
-                  data={data}></ProductItem>
-              )
-              :
-              <LoadingSpinner
-                condition={true}></LoadingSpinner>
-            }
-            
-          </div>
-          
+          <Router history={history}>
+            <Switch>
+              <Route exact path="/:id" component={ProductDetail}></Route>
+              <Route exact path="/" component={ProductList} />
+            </Switch>
+          </Router>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export const App = app

@@ -1,12 +1,6 @@
 .product_item{
   height: 100%;
   cursor: pointer;
-  transition: all .2s ease;
-}
-
-.product_item:hover{
-  background: #fab1a0;
-  color: white;
 }
 
 .product_item h2,

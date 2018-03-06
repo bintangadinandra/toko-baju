@@ -1,0 +1,8 @@
+.product_detail_wrap .head{
+  display: flex;
+}
+
+.product_detail_wrap .head h2{
+  flex-grow: 1;
+  padding-left: 1rem;
+}
