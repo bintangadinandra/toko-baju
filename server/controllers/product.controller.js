@@ -25,6 +25,14 @@ const getSingleProduct = async (productId) => {
   }
 }
 
+const createNewProduct = async (payload) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}
+
 module.exports = {
   getAllProduct,
   getSingleProduct

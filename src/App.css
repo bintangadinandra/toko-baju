@@ -3,6 +3,10 @@
   margin: auto;
 }
 
+.scroll_wrapper{
+  padding: 2rem 0px;
+}
+
 .search_bar{
   padding-top: .7rem;
 }
