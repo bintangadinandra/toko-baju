@@ -1,16 +1,24 @@
 const express = require('express')
+const productController = require('../controllers/product.controller')
+const handler = require('../utils/handler')
 const router = express.Router()
 
 router.get('/', async(req,res) => {
-  res.json({
-    status: 'success',
-    product_list: [
-      {
-        name: 'Lord Commander Coat',
-        description: 'Wonderful'
-      }
-    ]
-  })
+  try {
+    const result = await productController.getAllProduct()
+    res.json(result)
+  } catch (error) {
+    return res.json(handler.routerError(error))
+  }
+})
+
+router.get('/:id', async(req,res) => {
+  try {
+    const result = await productController.getSingleProduct(req.params.id)
+    res.json(result)
+  } catch (error) {
+    return res.json(handler.routerError(error))
+  }
 })
 
 

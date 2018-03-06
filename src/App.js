@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { productService } from './services/product.services'
+import { FormText } from './components/forms/FormText'
+import { Header } from './containers/Header'
+import { LoadingSpinner } from './components/LoadingSpinner';
 
 class App extends Component {
   constructor() {
@@ -14,9 +16,10 @@ class App extends Component {
   async componentDidMount() {
     // Api Test
     const res = await productService.getProduct()
+    console.log(res.data)
     if (res.data.status === 'success') {
       this.setState({
-        productList: res.data.product_list
+        productList: res.data.data_list
       })
     }
   }
@@ -24,21 +27,32 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        {
-          this.state.productList && this.state.productList.map((data, index) => 
-            <div key={index}>
-              <h2>{data.name}</h2>
-              <p>{data.description}</p>
-            </div>
-          )
-        }
+        <Header></Header>
+        <div className="store_container">
+          <div className="search_bar">
+            <FormText></FormText>
+          </div>
+          <hr/>
+          <h2 className="title is-3">Cari Produk</h2>
+          <div className="columns">
+            {
+              this.state.productList ? this.state.productList.map((data, index) =>
+                <div className="column is-4" key={index}>
+                  <div className="box">
+                  <img src={data.images.find(data => {return data.is_primary === true}).url} alt="image"/>
+                  <h2>{data.name}</h2>
+                  <p>{data.price}</p>
+                  </div>
+                </div>
+              )
+              :
+              <LoadingSpinner
+                condition={true}></LoadingSpinner>
+            }
+            
+          </div>
+          
+        </div>
       </div>
     );
   }

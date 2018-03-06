@@ -1,0 +1,9 @@
+.header{
+  background: #e17055;
+  padding: .7rem 0px;
+  color: white;
+}
+
+.header .title{
+  color: inherit;
+}
