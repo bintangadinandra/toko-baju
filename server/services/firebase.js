@@ -1,4 +1,5 @@
 const admin = require('firebase-admin')
+// const functions = require('firebase-functions')
 var serviceAccount = require('./toko-baju-2702d-firebase-adminsdk-1oct5-87247c4419.json')
 
 admin.initializeApp({

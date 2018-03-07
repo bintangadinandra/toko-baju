@@ -1,8 +1,13 @@
 const successHandler = (data, msg) => {
-  return Object.assign(data, {
+  const message = {
     status: 'success',
     message: msg || 'Operation Success'
-  })
+  }
+  if (data) {
+    return Object.assign(data, message)
+  } else {
+    return message
+  } 
 }
 
 const controllerError = (err) => {

@@ -1,8 +1,6 @@
 import { UPDATE_CURRENT_SELECTED_PRODUCT, DELETE_CURRENT_SELECTED_PRODUCT } from '../actions/mutation-types'
 
-const initial_state = {
-	hello: 'world'
-}
+const initial_state = {}
 
 export default (state = initial_state, action) => {
 	switch(action.type){

@@ -46,7 +46,6 @@ class componentName extends Component {
           :
           <LoadingSpinner condition={true}></LoadingSpinner>
         }
-        
       </div>
     )
   }

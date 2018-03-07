@@ -1,7 +1,11 @@
 import { apiService } from './api'
 
 const getProduct = () => {
-  return apiService.get('/product')
+  return apiService.get('/product/ranged')
+}
+
+const getMoreProduct = (date) => {
+  return apiService.get(`/product/ranged/${date}`)
 }
 
 const getSingleProduct = (id) => {
@@ -10,5 +14,6 @@ const getSingleProduct = (id) => {
 
 export const productService = {
   getProduct,
-  getSingleProduct
+  getSingleProduct,
+  getMoreProduct
 }
