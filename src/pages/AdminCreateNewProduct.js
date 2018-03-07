@@ -6,7 +6,7 @@ class componentName extends Component {
     return (
       <div>
         <h2>Product Detail Here</h2>
-        <AdminProductForm productId={window.location.pathname.split('/')[2]}></AdminProductForm>
+        <AdminProductForm isEdit={false}></AdminProductForm>
       </div>
     )
   }

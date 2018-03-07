@@ -18,18 +18,22 @@ class componentName extends Component {
   
   async componentWillMount() {
     let id = window.location.pathname.split('/')[1]
-    const res = await productService.getSingleProduct(id)
     if (this.props.productDetail) {
       this.setState({
         crntImage: this.props.productDetail.images ? this.props.productDetail.images.primary : ''
       })
     }
-    if (res.data.status === 'success') {
-      this.props.storeProduct(res.data)
-      this.setState({
-        productId: id,
-        crntImage: this.state.crntImage || (res.data.images ? res.data.images.primary : '')
-      })
+    try {
+      const res = await productService.getSingleProduct(id)
+      if (res.data.status === 'success') {
+        this.props.storeProduct(res.data.data)
+        this.setState({
+          productId: id,
+          crntImage: this.state.crntImage || (res.data.images ? res.data.images.primary : '')
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
