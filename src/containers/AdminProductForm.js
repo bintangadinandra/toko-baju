@@ -147,7 +147,7 @@ class componentName extends Component {
   render() {
     return (
       <div>
-        <pre>{JSON.stringify(this.state.formData, null, 2) }</pre>
+        {/* <pre>{JSON.stringify(this.state.formData, null, 2) }</pre> */}
         {
           (this.state.isLoading) ?
           <LoadingSpinner condition={true}></LoadingSpinner>
