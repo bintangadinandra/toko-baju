@@ -43,6 +43,7 @@ class componentName extends Component {
   handlePrimary (data) {
     this.setState({
       formData:{
+        ...this.state.formData,
         images: {
           others: [...this.state.formData.images.others],
           primary: data
@@ -101,6 +102,9 @@ class componentName extends Component {
   }
 
   validateForm = async() => {
+    this.setState({
+      isSubmit: true
+    })
     try {
       if (this.state.formData.name &&
         this.state.formData.price &&
@@ -135,12 +139,15 @@ class componentName extends Component {
       console.log(error)
       swal("Oops!", "An error has occured", "error")
     }
+    this.setState({
+      isSubmit: false
+    })
   }
-  
+
   render() {
     return (
       <div>
-        {/* <pre>{JSON.stringify(this.state.formData, null, 2) }</pre> */}
+        <pre>{JSON.stringify(this.state.formData, null, 2) }</pre>
         {
           (this.state.isLoading) ?
           <LoadingSpinner condition={true}></LoadingSpinner>
@@ -171,8 +178,8 @@ class componentName extends Component {
               handlePrimary={this.handlePrimary.bind(this)}
               images={this.state.formData.images || {}}></FormMultipleImageUploader>
             <hr/>
-            <div className="has-text-centerd">
-              <button className="button" onClick={this.validateForm}>Submit</button>
+            <div className="has-text-centered">
+              <button className={`button + ${this.state.isSubmit ? 'is-loading' : ''}`} onClick={this.validateForm}>Submit</button>
             </div>
           </div>
         }
