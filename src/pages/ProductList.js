@@ -23,11 +23,6 @@ class productList extends Component {
       })
     }
   }
-
-  handleClick = (e) => {
-    console.log(e)
-  }
-
   render() {
     return (
       <div>
@@ -41,12 +36,14 @@ class productList extends Component {
             this.state.productList ? this.state.productList.map((data, index) =>
               <ProductItem 
                 key={index} 
-                data={data}
-                onClick={this.handleClick}></ProductItem>
+                data={data}></ProductItem>
             )
             :
-            <LoadingSpinner
-              condition={true}></LoadingSpinner>
+            <div className="column is-12">
+              <LoadingSpinner
+                condition={true}>
+              </LoadingSpinner>
+            </div>
           }
           
         </div>
