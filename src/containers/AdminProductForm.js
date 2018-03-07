@@ -24,14 +24,27 @@ class componentName extends Component {
       isSubmit: false
     }
   }
-  handleDelete() {
 
+  handleDelete(data) {
+    const crntIdx = this.state.formData.images.others.indexOf(data)
+    const isPrimary = (data === this.state.formData.images.primary)
+    const newArray = this.state.formData.images.others.splice(crntIdx, 1)
+    console.log(newArray)
+    this.setState({
+      formData: {...this.state.formData, 
+        images: {
+          others: newArray,
+          primary: isPrimary ? this.state.formData.images.others[0] : this.state.formData.images.primary
+        }
+      }
+    })
   }
 
   handlePrimary (data) {
     this.setState({
       formData:{
         images: {
+          others: [...this.state.formData.images.others],
           primary: data
         }
       }
@@ -127,8 +140,7 @@ class componentName extends Component {
   render() {
     return (
       <div>
-        {/* <h4>Admin Product Form</h4> */}
-        <pre>{JSON.stringify(this.state.formData, null, 2) }</pre>
+        {/* <pre>{JSON.stringify(this.state.formData, null, 2) }</pre> */}
         {
           (this.state.isLoading) ?
           <LoadingSpinner condition={true}></LoadingSpinner>

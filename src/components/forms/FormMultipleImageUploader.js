@@ -27,9 +27,12 @@ class componentName extends Component {
         </div>
         {
           (this.props.images && this.props.images.others) && this.props.images.others.map((data, index) => 
-            <div className="image_item" key={index} onClick={() => this.props.handleDelete(data)}>
-              <span>{data}</span>
-              <button className="button is-small" onClick={() => this.props.handlePrimary(data)}>Set As Primary</button>
+            <div className="image_item" key={index}>
+              <div>{data}</div>
+              <div>
+                <button className="button is-success is-small" onClick={() => this.props.handlePrimary(data)}>Set As Primary</button>
+                <button className="button is-danger is-small" onClick={() => this.props.handleDelete(data)}>-</button>
+              </div>
             </div>
           )
         }

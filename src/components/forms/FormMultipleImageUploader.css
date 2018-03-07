@@ -16,3 +16,24 @@
   border: 1px solid gainsboro;
   border-radius: .25rem;
 }
+
+.image_item{
+  display: flex;
+}
+
+.image_item > div:first-child{
+  flex-grow: 1;
+  word-break: break-all
+}
+
+.image_item > div:last-child{
+  width: 200px;
+  /* text-align: center; */
+  display: flex;
+  justify-content: space-around;
+  margin-left: .5rem;
+  padding-left: .5rem;
+  border-left: 1px solid gainsboro;
+  align-items: center;
+  flex-direction: column;
+}

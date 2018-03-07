@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { AdminProductList } from './AdminProductList'
 import { AdminProductDetail } from './AdminProductDetail'
+import { AdminCreateNewProduct } from './AdminCreateNewProduct'
 import { AdminSidebar } from '../containers/AdminSidebar'
 import './AdminProductLayout.css'
 
@@ -17,6 +18,7 @@ const componentName = ({ match }) => {
           <Router history={history}>
             <Switch>
               <Route exact path={`${match.url}`} component={AdminProductList}></Route>
+              <Route exact path={`${match.url}/create`} component={AdminCreateNewProduct}></Route>
               <Route exact path={`${match.url}/:id`} component={AdminProductDetail}></Route>
             </Switch>
           </Router>

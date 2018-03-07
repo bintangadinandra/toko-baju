@@ -27,12 +27,8 @@ class componentName extends Component {
     }
   }
 
-  showDetail(data) {
-    console.log(data)
-  }
-
   goToCreatePage = () => {
-    console.log('Hi!')
+    this.props.history.push('/admin/create')
   }
 
   render() {
