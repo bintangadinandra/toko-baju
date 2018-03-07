@@ -14,7 +14,8 @@ class productList extends Component {
       productList: '',
       isLoadingMore: false,
       crntLastUpdated: '',
-      isBottom: false
+      isBottom: false,
+      searchKey: ''
     }
   }
 
@@ -64,8 +65,10 @@ class productList extends Component {
     window.removeEventListener('scroll', this.onScroll, false);
   }
 
-  loadMore() {
-    console.log('load more!')
+  handleInputChange = (e) => {
+    this.setState({
+      searchKey: e.target.value
+    })
   }
 
   render() {
@@ -73,17 +76,24 @@ class productList extends Component {
       <div>
         <h2 className="title is-3">Cari Produk</h2>
         <div className="search_bar">
-          <FormText></FormText>
+          <FormText 
+            onChange={this.handleInputChange}></FormText>
         </div>
+        {
+          this.state.searchKey &&
+          <p className="search_key">Memunculkan hasil pencarian untuk: <strong>{this.state.searchKey}</strong></p>
+        }
         <hr/>
         <div className="columns is-multiline">
           {
-            this.props.ProductList ? this.props.ProductList.data.map((data, index) =>
+            (this.props.ProductList) && this.props.ProductList.data.map((data, index) =>
               <ProductItem 
                 key={index} 
                 data={data}></ProductItem>
             )
-            :
+          }
+          {
+            (this.state.isLoadingMore) && 
             <div className="column is-12">
               <LoadingSpinner
                 condition={true}>
@@ -91,7 +101,11 @@ class productList extends Component {
             </div>
           }
         </div>
-        
+        <div className="fetch_wrap">
+          <button className="button is-primary">
+            Refresh
+          </button>
+        </div>
       </div>
     );
   }

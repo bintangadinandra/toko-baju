@@ -1,12 +1,26 @@
 .store_container{
   max-width: 800px;
   margin: auto;
+  padding: 0px 1rem;
 }
 
 .scroll_wrapper{
-  padding: 2rem 0px;
+  padding: 2rem 1rem;
 }
 
 .search_bar{
   padding-top: .7rem;
+}
+
+.fetch_wrap{
+  position: absolute;
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.search_key{
+  margin-top: 1rem;
+  font-style: italic;
+  font-size: 12px;
 }

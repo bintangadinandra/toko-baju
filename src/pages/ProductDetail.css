@@ -6,3 +6,30 @@
   flex-grow: 1;
   padding-left: 1rem;
 }
+
+.carousel_preview_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0px;
+}
+
+.carousel_preview{
+  width: 4rem;
+  cursor: pointer;
+}
+
+.carousel_preview.selected{
+  border: 2px solid #e17055;
+}
+
+.shown_image{
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: .25rem;
+  border: 1px solid gainsboro;
+}
+
+.shown_image img{
+  width: 100%;
+}

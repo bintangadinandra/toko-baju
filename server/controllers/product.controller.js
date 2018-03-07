@@ -39,6 +39,17 @@ const getNextProduct = async(date) => {
 
 const getSingleProduct = async (productId) => {
   try {
+    /* errr, cancel plan because no includes operations in firestore >.< */
+    var data = handler.successHandler(Object.assign(querySnapshot.data(), {id: productId}), 'Get Single Product Success')
+    return data
+  } catch (error) {
+    console.log(error)
+    return handler.controllerError(error)
+  }
+}
+
+const searchProduct = async (key) => {
+  try{
     const productRef = db.collection('product').doc(productId)
     const querySnapshot = await productRef.get()
     var data = handler.successHandler(Object.assign(querySnapshot.data(), {id: productId}), 'Get Single Product Success')

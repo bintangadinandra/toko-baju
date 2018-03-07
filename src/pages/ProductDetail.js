@@ -5,23 +5,30 @@ import { LoadingSpinner } from '../components/LoadingSpinner'
 import { withRouter } from 'react-router-dom'
 import { storeProduct, emptyProduct } from '../actions/productDetailActions'
 import { connect } from 'react-redux'
+import { formatterUtil } from '../utils/formatter'
 
 class componentName extends Component {
   constructor(){
     super()
     this.state = {
-      productId: ''
+      productId: '',
+      crntImage: ''
     }
   }
   
   async componentWillMount() {
     let id = window.location.pathname.split('/')[1]
     const res = await productService.getSingleProduct(id)
+    if (this.props.productDetail) {
+      this.setState({
+        crntImage: this.props.productDetail.images ? this.props.productDetail.images.primary : ''
+      })
+    }
     if (res.data.status === 'success') {
       this.props.storeProduct(res.data)
-      console.log('Props updated')
       this.setState({
-        productId: id
+        productId: id,
+        crntImage: this.state.crntImage || (res.data.images ? res.data.images.primary : '')
       })
     }
   }
@@ -30,18 +37,47 @@ class componentName extends Component {
     this.props.history.push('/')
   }
 
+  changeImage(data) {
+    this.setState({
+      crntImage: data
+    })
+  }
+
   render() {
+    let {productDetail} = this.props;
     return (
       <div className="product_detail_wrap">
         {
-          (this.props.productDetail) ? 
-          <div className="head">
-            <button className="button is-primary" onClick={this.backToList}>Back</button>
-            <div>
-              <h2 className="subtitle is-6">Detail Produk</h2>
-              <h2 className="title is-3">{this.props.productDetail.name}</h2>
-              <p>{this.props.productDetail.price}</p>
+          (productDetail) ? 
+          <div className="detail_wrapper">
+            <div className="columns is-multiline">
+              <button className="column is-1 button is-primary" onClick={this.backToList}>Back</button>
+              <div className="column is-9">
+                <h2 className="subtitle is-11">Detail Produk</h2>
+                <h2 className="title is-3">{productDetail.name}</h2>
+              </div>
+              <div className="column is-8 is-offset-2">
+                <div className="box">
+                  <div className="image_carousel">
+                    <div className="shown_image">
+                      <img src={this.state.crntImage || 'https://nhccpk.com/wp-content/uploads/2015/02/qw.jpg'} />
+                    </div>
+                    <div className="carousel_preview_wrapper">
+                      {
+                        (productDetail.images) && productDetail.images.others.map((data, index) => 
+                          <div onClick={() => this.changeImage(data)} key={index} className={`carousel_preview ${this.state.crntImage===data ? 'selected' : ''}`}>
+                            <img src={data}/>
+                          </div>
+                        )
+                      }
+                    </div>
+                  </div>
+                  <p><strong>Harga:</strong>{formatterUtil.prettifyPrice(productDetail.price)}</p>
+                  <p><strong>Deskripsi: </strong>{productDetail.description || 'Tidak ada Deskripsi'}</p>
+                </div>
+              </div>
             </div>
+            
           </div>
           :
           <LoadingSpinner condition={true}></LoadingSpinner>
