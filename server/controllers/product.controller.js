@@ -39,7 +39,8 @@ const getNextProduct = async(date) => {
 
 const getSingleProduct = async (productId) => {
   try {
-    /* errr, cancel plan because no includes operations in firestore >.< */
+    const productRef = db.collection('product').doc(productId)
+    const querySnapshot = await productRef.get()
     var data = handler.successHandler(Object.assign(querySnapshot.data(), {id: productId}), 'Get Single Product Success')
     return data
   } catch (error) {
@@ -50,6 +51,7 @@ const getSingleProduct = async (productId) => {
 
 const searchProduct = async (key) => {
   try{
+    /* errr, cancel plan because no includes operations in firestore >.< */
     const productRef = db.collection('product').doc(productId)
     const querySnapshot = await productRef.get()
     var data = handler.successHandler(Object.assign(querySnapshot.data(), {id: productId}), 'Get Single Product Success')

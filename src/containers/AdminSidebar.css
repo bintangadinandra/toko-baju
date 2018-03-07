@@ -1,0 +1,17 @@
+.admin_sidebar{
+  background: #d63031;
+  color: white;
+  width: 170px;
+  box-shadow: inset -10px 0px 20px rgba(0,0,0,0.1);
+}
+
+.admin_sidebar .title{
+  color: white;
+  padding: 1rem;
+}
+
+.admin_sidebar li{
+  padding: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}

@@ -1,0 +1,9 @@
+.admin_wrapper{
+  display: flex;
+}
+
+.content{
+  height: calc(100vh - 44.38px);
+  overflow-x: hidden;
+  flex-grow: 1;
+}
