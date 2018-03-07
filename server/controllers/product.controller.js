@@ -41,7 +41,7 @@ const getSingleProduct = async (productId) => {
   try {
     const productRef = db.collection('product').doc(productId)
     const querySnapshot = await productRef.get()
-    var data = handler.successHandler(Object.assign(querySnapshot.data(), {id: productId}), 'Get Single Product Success')
+    var data = handler.successHandler({data: Object.assign(querySnapshot.data(), {id: productId})}, 'Get Single Product Success')
     return data
   } catch (error) {
     console.log(error)

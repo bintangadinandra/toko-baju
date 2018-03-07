@@ -8,7 +8,7 @@ const component = (props) => {
         <label className="label">{props.label}</label>
       }
       <div className="control has-icons-right">
-        <input className="input" type="text" name={props.name} onChange={props.onChange} placeholder={props.placeholder || 'Search Product'} value={props.value}/>
+        <textarea className="input" name={props.name} onChange={props.onChange} placeholder={props.placeholder || 'Search Product'} value={props.value}/>
         <span className="icon is-small is-right">
         </span>
       </div>
@@ -16,4 +16,4 @@ const component = (props) => {
   )
 }
 
-export const FormText = component
+export const FormTextArea = component

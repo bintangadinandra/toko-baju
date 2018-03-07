@@ -73,7 +73,7 @@ class productList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="store_container scroll_wrapper">
         <h2 className="title is-3">Cari Produk</h2>
         <div className="search_bar">
           <FormText 

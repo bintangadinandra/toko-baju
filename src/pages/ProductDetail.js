@@ -18,18 +18,22 @@ class componentName extends Component {
   
   async componentWillMount() {
     let id = window.location.pathname.split('/')[1]
-    const res = await productService.getSingleProduct(id)
     if (this.props.productDetail) {
       this.setState({
         crntImage: this.props.productDetail.images ? this.props.productDetail.images.primary : ''
       })
     }
-    if (res.data.status === 'success') {
-      this.props.storeProduct(res.data)
-      this.setState({
-        productId: id,
-        crntImage: this.state.crntImage || (res.data.images ? res.data.images.primary : '')
-      })
+    try {
+      const res = await productService.getSingleProduct(id)
+      if (res.data.status === 'success') {
+        this.props.storeProduct(res.data.data)
+        this.setState({
+          productId: id,
+          crntImage: this.state.crntImage || (res.data.data.images ? res.data.data.images.primary : '')
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -46,7 +50,7 @@ class componentName extends Component {
   render() {
     let {productDetail} = this.props;
     return (
-      <div className="product_detail_wrap">
+      <div className="product_detail_wrap store_container scroll_wrapper">
         {
           (productDetail) ? 
           <div className="detail_wrapper">
@@ -60,13 +64,13 @@ class componentName extends Component {
                 <div className="box">
                   <div className="image_carousel">
                     <div className="shown_image">
-                      <img src={this.state.crntImage || 'https://nhccpk.com/wp-content/uploads/2015/02/qw.jpg'} />
+                      <img src={this.state.crntImage || 'https://nhccpk.com/wp-content/uploads/2015/02/qw.jpg'} alt={this.state.crntImage}/>
                     </div>
                     <div className="carousel_preview_wrapper">
                       {
                         (productDetail.images) && productDetail.images.others.map((data, index) => 
                           <div onClick={() => this.changeImage(data)} key={index} className={`carousel_preview ${this.state.crntImage===data ? 'selected' : ''}`}>
-                            <img src={data}/>
+                            <img src={data} alt={data}/>
                           </div>
                         )
                       }
