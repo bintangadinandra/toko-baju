@@ -23,7 +23,7 @@ class app extends Component {
           <Header></Header>
           <Router history={history}>
             <Switch>
-              <Route exact path="/admin" component={AdminProductLayout}></Route>
+              <Route path="/admin" component={AdminProductLayout}></Route>
               <Route exact path="/:id" component={ProductDetail}></Route>
               <Route exact path="/" component={ProductList} />
             </Switch>
